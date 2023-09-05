@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-villkor A</title>
+</head>
+<body>
+    <input type="text" name="myFirstInput" id="myFirstInput">
+    <input type="text" name="mySecondInput" id="mySecondInput">
+
+    <button type="button" onclick="myComparison()"></button>
+    <div id="myOutputDiv"></div>
+
+    <script>
+        function myComparison() {
+            if (document.getElementById("myFirstInput").value < document.getElementById("mySecondInput").value) {
+                document.getElementById("myOutputDiv").innerText = document.getElementById("mySecondInput").value;
+            } else if (document.getElementById("myFirstInput").value > document.getElementById("mySecondInput").value) {
+                document.getElementById("myOutputDiv").innerText = document.getElementById("myFirstInput").value;
+            } else if (document.getElementById("myFirstInput").value === document.getElementById("mySecondInput").value) {
+                document.getElementById("myOutputDiv").innerText = "Talen är lika stora";
+            } else {
+                document.getElementById("myOutputDiv").innerText = "Talen är inga tal";
+            }
+        }
+    </script>
+</body>
+</html>

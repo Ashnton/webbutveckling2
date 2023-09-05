@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-grunder E</title>
+</head>
+<body>
+    <input type="text" id="myPrice">
+    <input type="text" id="myDiscount">
+
+    <button type="button" id="myButton"></button>
+
+    <div id="myDiv"></div>
+
+    <script>
+        document.getElementById("myButton").addEventListener('click', () => {
+            let oldPrice = document.getElementById("myPrice").value;
+            let discount = document.getElementById("myDiscount").value;
+            let newPrice = parseFloat(document.getElementById("myPrice").value) * (1-(parseFloat(document.getElementById("myDiscount").value)/100));
+            let savings = parseFloat(oldPrice) - newPrice;
+
+            document.getElementById("myDiv").innerText = "Ordinarie pris är " + oldPrice + " kr, med " + discount + " % rabatt ger det rabatten " + savings + " kr. Det nya priset blir " + newPrice +" kr"
+        })
+    </script>
+</body>
+</html>

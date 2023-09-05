@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-start G</title>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <button type="button" id="myButton"></button>
+
+    <script>
+        document.getElementById("myButton").addEventListener('click', myFunction);
+        let myKlickCounter = 0;
+        
+        function myFunction() {
+            myKlickCounter++;
+            document.getElementById("myDiv").append("Anton Lidström");
+            document.getElementById("myDiv").append(myKlickCounter);
+        }
+    </script>
+</body>
+</html>

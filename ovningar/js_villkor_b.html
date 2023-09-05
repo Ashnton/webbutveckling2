@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-villkor B</title>
+</head>
+<body>
+    <input type="text" name="myPriceInput" id="myPriceInput">
+    <button type="button" id="mySubmitButton"></button>
+    <div id="myOutputDiv"></div>
+
+    <script>
+        document.getElementById("mySubmitButton").addEventListener('click', () => {
+            let price = parseFloat(document.getElementById("myPriceInput").value);
+            let outputDiv = document.getElementById("myOutputDiv");
+
+            if (price >= 10000) {
+                outputDiv.innerText = "30% rabatt. Slutpris = " + (price * 0.70); 
+            } else if (price >= 5000) {
+                outputDiv.innerText = "20% rabatt. Slutpris = " + (price * 0.80); 
+            } else if (price >= 1000) {
+                outputDiv.innerText = "10% rabatt. Slutpris = " + (price * 0.90); 
+            } else {
+                outputDiv.innerText = "Du får ingen rabatt."; 
+            }
+        })
+    </script>
+</body>
+</html>

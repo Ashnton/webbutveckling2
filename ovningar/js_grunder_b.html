@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-grunder B</title>
+</head>
+<body>
+    <input type="text" name="input1" id="input1">
+    <input type="text" name="input2" id="input2">
+    <input type="text" name="input3" id="input3">
+    <button type="button" onclick="textCopyController()">Click me!</button>
+
+    <script>
+        function textCopyController() {
+            document.getElementById("input3").value = document.getElementById("input1").value + document.getElementById("input2").value;
+        }
+    </script>
+</body>
+</html>

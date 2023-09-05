@@ -1,0 +1,22 @@
+<button type="button" id="jsba">Visa</button>
+<button type="button" id="jsbb">Visa mer</button>
+<div id="jsdivx">Här kommer viktig information!</div>
+
+<script>
+var y=7;
+document.getElementById("jsba").addEventListener('click', testa);
+document.getElementById("jsbb").addEventListener('click', testb);
+function testa() {
+    "use strict";
+    let x=1;
+    document.getElementById("jsdivx").innerHTML +=
+    "<hr>"+"x="+x+"<br />"+ "y="+y+"<br />";
+}
+
+function testb() {
+    "use strict";
+    var x = "HEJ!";
+    document.getElementById("jsdivx").innerHTML +=
+    "<hr>"+"x="+x+"<br />"+ "y="+y;
+    }
+</script>

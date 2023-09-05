@@ -1,0 +1,21 @@
+<button type="button" id="jsbuttonx">Visa</button>
+<button type="button" id="jsbuttonxx">Visa mer</button>
+<div id="jsdivx">Här kommer viktig information!</div>
+
+<script>
+var x=22, y=7;
+document.getElementById('jsbuttonx').addEventListener('click', jsfunktionz);
+document.getElementById('jsbuttonxx').addEventListener('click', jsfunktionzz);
+function jsfunktionz() {
+x=1;
+var y=3, z=4;
+document.getElementById("jsdivx").innerHTML +=
+"<hr>"+"x="+x+"<br />"+ "y="+y+"<br />"+"z="+z;
+}
+
+function jsfunktionzz() {
+    document.getElementById("jsdivx").innerHTML =
+    document.getElementById("jsdivx").innerHTML +
+    "<hr>"+"x="+x+"<br />"+ "y="+y + "z="+z;
+}
+</script>

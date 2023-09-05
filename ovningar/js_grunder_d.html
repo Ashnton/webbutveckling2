@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-grunder D</title>
+</head>
+<body>
+    <input type="text" name="input1" id="input1">
+    <input type="text" name="input2" id="input2">
+    <input type="text" name="input3" id="input3">
+    <button type="button" onclick="textCopyController()">Click me!</button>
+
+    <div id="averageDiv">
+
+    </div>
+
+    <script>
+        function textCopyController() {
+            let myAverage = (parseFloat(document.getElementById("input3").value) + parseFloat(document.getElementById("input1").value) + parseFloat(document.getElementById("input2").value))/3;
+            document.getElementById("averageDiv").innerHTML = myAverage;
+        }
+    </script>
+</body>
+</html>
