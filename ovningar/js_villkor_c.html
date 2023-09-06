@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-villkor C</title>
+</head>
+<body>
+    <input type="text" name="myInput1" id="myInput1">
+    <input type="text" name="myInput2" id="myInput2">
+    <input type="text" name="myInput3" id="myInput3">
+    <button type="button" id="myButton" onclick="mySortingFunction()">My button</button>
+
+    <div id="myOutputDiv"></div>
+
+    <script>
+        function mySortingFunction() {
+            let myArray = [document.getElementById("myInput1").value, document.getElementById("myInput2").value, document.getElementById("myInput3").value];
+            let mySortedArray = myArray.sort((a, b) => {
+                return b - a;
+            });
+            document.getElementById("myOutputDiv").innerText = mySortedArray[0];
+        }
+    </script>
+</body>
+</html>
