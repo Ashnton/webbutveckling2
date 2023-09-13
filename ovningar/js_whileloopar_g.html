@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Whileloopar G</title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <input type="text" id="myInput2">
+    <button type="button" id="myButton" onclick="myFunction()">Min knapp</button>
+    <div id="myDiv"></div>
+
+    <script>
+        function myFunction() {
+            const myStart = document.getElementById("myInput").value;
+            const myStop = document.getElementById("myInput2").value;
+            let answer = 0;
+
+            let i = parseInt(myStart);
+            while (i <= parseInt(myStop)) {
+                if (i % 2 === 0) {
+                    answer += i;
+                    i++;
+                } else {
+                    answer -= i;
+                    i++;
+                }
+            }
+    
+            document.getElementById('myDiv').innerText = answer;
+        }
+
+    </script>
+</body>
+</html>

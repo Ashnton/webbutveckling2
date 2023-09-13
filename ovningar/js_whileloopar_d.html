@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Whileloopar D</title>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <div id="myDiv2"></div>
+
+    <script>
+        document.getElementById('myDiv').innerText = 1000*1001/2;
+        
+        let i = 1;
+        let answer = 0;
+        while (i <= 1000) {
+            answer += i;
+            i++;
+        }
+        document.getElementById('myDiv2').innerText = answer;
+    </script>
+</body>
+</html>

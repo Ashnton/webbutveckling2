@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Whileloopar E</title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <button type="button" id="myButton" onclick="myFunction()">Min knapp</button>
+    <div id="myDiv"></div>
+
+    <script>
+        function myFunction() {
+            const myValue = document.getElementById("myInput").value;
+            let answer = 0;
+
+            let i = 1
+            while (i <= myValue) {
+                answer += i;
+                i++;
+            }
+    
+            document.getElementById('myDiv').innerText = answer;
+        }
+
+    </script>
+</body>
+</html>

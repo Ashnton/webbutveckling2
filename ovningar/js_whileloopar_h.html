@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Whileloopar H</title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <button type="button" id="myButton" onclick="myFunction()">My Button</button>
+
+    <div id="myDiv"></div>
+
+    <script>
+        function myFunction() {
+            const inputNumber = document.getElementById('myInput').value;
+            const myDiv = document.getElementById('myDiv');
+
+            let j = 1;
+            let answerArray = [];
+            while (answerArray.length < 100) {
+                while (j % inputNumber !== 0) {
+                    j++;
+                }
+                answerArray.push(j);
+                j++;
+            }
+            console.log(answerArray);
+        }
+    </script>
+</body>
+</html>
