@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For-loopar G</title>
+</head>
+
+<body>
+  <input type="text" id="myInput">
+  <input type="text" id="myInput2">
+  <button type="button" id="myButton" onclick="startCount()">My Button</button>
+  <div id="myDiv"></div>
+
+  <script>
+    function startCount() {
+      let answer = 0;
+      const inputStart = parseInt(document.getElementById('myInput').value);
+      const inputEnd = parseInt(document.getElementById('myInput2').value);
+      for (let i = inputStart; i <= inputEnd; i++) {
+        if (i % 2 == 0) {
+          answer += i;
+        } else {
+          answer -= i;
+        }
+      }
+      document.getElementById('myDiv').innerText += answer;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For-loopar E</title>
+</head>
+
+<body>
+  <input type="text" id="myInput">
+  <button type="button" id="myButton" onclick="startCount()">My Button</button>
+  <div id="myDiv"></div>
+
+  <script>
+    function startCount() {
+      let answer = 0;
+      const inputNum = parseInt(document.getElementById('myInput').value);
+      for (let i = 1; i <= inputNum; i++) {
+        answer += i;
+      }
+      document.getElementById('myDiv').innerText += answer;
+    }
+  </script>
+</body>
+
+</html>

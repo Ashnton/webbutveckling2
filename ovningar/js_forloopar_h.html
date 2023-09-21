@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For-loopar H</title>
+</head>
+
+<body>
+  <input type="text" id="myInput">
+  <button type="button" id="myButton" onclick="startCount()">My Button</button>
+  <div id="myDiv"></div>
+
+  <script>
+    function startCount() {
+      let answer = 0;
+      const inputStart = parseInt(document.getElementById('myInput').value);
+
+      for (let i = 1; i <= 100; i++) {
+        document.getElementById('myDiv').innerText += " " + inputStart * i;
+        if (i % 10 === 0) {
+          document.getElementById('myDiv').innerHTML += "<br>";
+        }
+      }
+
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For-loopar D</title>
+</head>
+
+<body>
+  <div id="myDiv"></div>
+  <button type="button" id="myButton" onclick="startCount()">My Button</button>
+
+  <script>
+    function startCount() {
+      let answer = 0;
+      for (let i = 1; i <= 1000; i++) {
+        answer += i;
+      }
+      document.getElementById('myDiv').innerText += answer;
+    }
+  </script>
+</body>
+
+</html>
