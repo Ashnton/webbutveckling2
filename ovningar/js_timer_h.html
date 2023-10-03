@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Timer G</title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <button type="button" onclick="double()">Starta</button>
+
+    <script>
+        function double() {
+            let num = document.getElementById("myInput").value
+            let bing = setInterval(() => {
+                num = num*2
+                document.getElementById("myInput").value = num
+            }, 2000)
+        }
+    </script>
+</body>
+</html>

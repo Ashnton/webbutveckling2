@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Timer G</title>
+</head>
+<body>
+    <div id="myKlockspel"></div>
+
+    <script>
+        const myKlockspel = document.getElementById("myKlockspel")
+        let bing = setInterval(() => {
+            myKlockspel.innerHTML += "bing"
+        }, 2000)
+        let bang = setInterval(() => {
+            myKlockspel.innerHTML += "bang"
+        }, 3000)
+        let bong = setInterval(() => {
+            myKlockspel.innerHTML += "bong"
+        }, 4000)
+    </script>
+</body>
+</html>

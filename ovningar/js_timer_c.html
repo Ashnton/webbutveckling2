@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Timer C</title>
+</head>
+<body>
+    <div id="myTime"></div>
+    <button onclick="start()">Start</button><button onclick="stop()">Paus</button><button onclick="stop()">Stopp</button><button onclick="reset()">Återställ</button>
+
+    <script>
+        const myTimeDiv = document.getElementById('myTime');
+        let i = 0;
+        let myTimer;
+
+        function start() {
+            myTimer = setInterval(() => {
+                i++;
+                myTimeDiv.innerHTML = i;
+            }, 1000);
+        }
+        
+        function stop() {
+            window.clearInterval(myTimer);
+        }
+
+        function reset() {
+            i = 0;
+            myTimeDiv.innerHTML = i;
+        }
+    </script>
+</body>
+</html>

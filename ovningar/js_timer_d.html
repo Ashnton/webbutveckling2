@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Timer D</title>
+</head>
+<body>
+    <div id="myTime"></div>
+    <button onclick="start()">Start</button><button onclick="stop()">Paus</button><button onclick="stop()">Stopp</button>
+
+    <script>
+        const myTimeDiv = document.getElementById('myTime');
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+        let myTimer;
+
+        function start() {
+            myTimer = setInterval(() => {
+                if (seconds < 60) {
+                    seconds++;
+                } else if (seconds == 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+
+                if (minutes == 60) {
+                    minutes = 0;
+                    hours++;
+                }
+                myTimeDiv.innerHTML = hours + ":" + minutes + ":" + seconds;
+            }, 1000);
+        }
+        
+        function stop() {
+            window.clearInterval(myTimer);
+        }
+    </script>
+</body>
+</html>

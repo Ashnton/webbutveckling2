@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Timer A</title>
+</head>
+<body>
+    <marquee behavior="" direction="" id="myTime"></marquee>
+
+    <script>
+        const myTimeDiv = document.getElementById("myTime");
+        let i = 0;
+        setInterval(() => {
+            i++;
+            myTimeDiv.innerHTML = i; 
+        }, 1000)
+    </script>
+</body>
+</html>

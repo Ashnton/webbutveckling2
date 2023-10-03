@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Timer E</title>
+</head>
+<body>
+    <input type="text" id="myMinutes">
+    <input type="text" id="mySeconds">
+    <button onclick="startCountdown()">Starta</button>
+    <div id="display"></div>
+
+    <script>
+        let countdownInterval;
+
+        function startCountdown() {
+            const mySeconds = document.getElementById("mySeconds");
+            const myMinutes = document.getElementById("myMinutes");
+
+            let seconds = parseInt(mySeconds.value, 10);
+            let minutes = parseInt(myMinutes.value, 10);
+
+            countdownInterval = setInterval(() => {
+                if (seconds > 0) {
+                    seconds -= 1;
+                } else if (minutes > 0) {
+                    minutes -= 1;
+                    seconds = 59;
+                } else {
+                    clearInterval(countdownInterval);
+                    document.getElementById("display").innerText = "något kul";
+                }
+
+                mySeconds.value = seconds;
+                myMinutes.value = minutes;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
