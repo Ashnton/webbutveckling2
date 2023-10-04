@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array 1</title>
+</head>
+<body>
+    <button onclick="sum()">Summera</button>
+    <div id="myDiv"></div>
+
+    <script>
+        myArray = [1, 4, 3, 5, 9];
+
+        function sum() {
+            let sum = 0;
+            for (let i = 0; i < myArray.length; i++) {
+                sum += myArray[i];
+            }
+
+            document.getElementById("myDiv").append(sum);
+            printArray();
+            printAverage(sum);
+            printSorted();
+        }
+
+        function printArray() {
+            let myDiv = document.getElementById("myDiv")
+            for (let i = 0; i < myArray.length; i++) {
+                myDiv.innerHTML += "<br>";
+                myDiv.innerText += myArray[i];
+                
+            }
+        }
+
+        function printAverage(sum) {
+            let average = sum/(myArray.length);
+            document.getElementById("myDiv").innerHTML += "<br>";
+            document.getElementById("myDiv").append(average);
+        }
+
+        function printSorted() {
+            document.getElementById("myDiv").innerHTML += "<br>";
+            document.getElementById("myDiv").innerHTML += myArray.sort();
+        }
+    </script>
+</body>
+</html>

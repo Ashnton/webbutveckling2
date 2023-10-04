@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array 4</title>
+
+    <style>
+        input {
+            display: block;
+        }
+        button {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="score1">
+    <input type="text" id="score2">
+    <input type="text" id="score3">
+    <input type="text" id="score4">
+    <input type="text" id="score5">
+    <input type="text" id="score6">
+    <input type="text" id="score7">
+
+    <button onclick="execute()">Beräkna slutpoäng</button>
+    
+    <div id="myDiv"></div>
+
+    <script>
+
+        function execute() {
+            let myArray = [];
+    
+            for (let i = 1; i <= 7; i++) {
+                myArray.push(document.getElementById("score"+ i).value);
+            }
+    
+            myArray = myArray.sort(function(a, b){return a-b});
+            myArray.shift();
+            myArray.pop();
+    
+            let sum = 0;
+            for (let i = 0; i < myArray.length; i++) {
+                sum += parseFloat(myArray[i]);   
+            }
+    
+            document.getElementById("myDiv").innerHTML += (sum/5).toFixed(2);
+        }
+    </script>
+</body>
+</html>

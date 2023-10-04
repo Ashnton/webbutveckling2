@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array 3</title>
+</head>
+<body>
+    <input type="text" id="myArrayInput">
+    <button type="button" id="myButton" onclick="addToArray()">Lägg till</button>
+
+    <div id="myDisplay">
+
+    </div>
+
+    <script>
+        const myArrayInput = document.getElementById("myArrayInput");
+        const myDisplay = document.getElementById("myDisplay");
+
+        let array = [];
+        function addToArray() {
+            array.push(myArrayInput.value);
+            updateDisplay();
+            sort();
+            average();
+        }
+
+        function updateDisplay() {
+            myDisplay.innerText += "[" + array + "]"; 
+        } 
+        
+        function sort() {
+            myDisplay.innerText += "[" + array.sort(function(a, b){return a-b}) + "]"; 
+        }
+        
+        function average() {
+            let sum = 0;
+            
+            for (let i = 0; i < array.length; i++ ) {
+                sum += parseFloat(array[i]);
+            }
+
+            let average = sum/array.length;
+            console.log(average);
+            console.log(sum);
+            console.log(array.length);
+
+            myDisplay.innerHTML += "<br>"; 
+            myDisplay.innerText += average; 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array 2</title>
+</head>
+<body>
+    <div id="myShowroom" data-changing="true">
+        <img id="myPicture" src="">
+    </div>
+    <button onclick="toggle()" id="myToggle">Stop</button>
+
+    <script>
+        let images = ["OIG (1).jfif", "OIG..Uttwcs23.PmOV7.jfif", "OIG.A3.jfif", "OIG.jfif", "OIG.qEpR0nT_fpj.jfif"]
+        let i = 0
+
+        let interval = setInterval(() => {
+            document.getElementById("myPicture").setAttribute("src", "../bilder/" + images[i]);
+            i++;
+            if (i === images.length) {
+                i = 0;
+            }
+        }, 1000/3);
+        
+        function toggle() {
+            if (document.getElementById("myShowroom").getAttribute("data-changing") === "true") {
+                clearInterval(interval);
+                document.getElementById("myToggle").innerText = "Start";
+                document.getElementById("myShowroom").setAttribute("data-changing", "false");
+            } else {
+                document.getElementById("myToggle").innerText = "Stop";
+                document.getElementById("myShowroom").setAttribute("data-changing", "true");
+                interval = setInterval(() => {
+                    document.getElementById("myPicture").setAttribute("src", "../bilder/" + images[i]);
+                    i++;
+                    if (i === images.length) {
+                        i = 0;
+                    }
+                }, 1000/3);
+            }
+        }
+    </script>
+</body>
+</html>
