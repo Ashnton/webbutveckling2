@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Funktioner 5</title>
+</head>
+<body>
+    <input type="text" id="input1">
+    <input type="text" id="input2">
+    <input type="text" id="input3">
+    <button type="button" onclick="räkna()">Räkna</button>
+
+    <script>
+        function summera(tal1, tal2, tal3) {
+            return parseFloat(tal1)+parseFloat(tal2)+parseFloat(tal3)
+        }
+
+        function räkna() {
+            document.write(summera(document.getElementById("input1").value, document.getElementById("input2").value, document.getElementById("input3").value))
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Funktion 3</title>
+</head>
+<body>
+    <script>
+        function skrivMittNamnAntalGånger(namn, antal) {
+            minSträng = "";
+            for (let i = 0; i < antal; i++) {
+                minSträng += namn;
+            }
+
+            return minSträng;
+        }
+
+        document.write(skrivMittNamnAntalGånger("Anton", 1000))
+    </script>
+</body>
+</html>
