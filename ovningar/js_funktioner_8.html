@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Funktioner 8</title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <button type="button" onclick="loadArray()">Skicka</button>
+    <div id="myReturnDiv"></div>
+    <div id="myReturnDivViggo"></div>
+
+    <script>
+        function loadArray() {
+            myArray = document.getElementById("myInput").value.split(" ");
+            document.getElementById("myReturnDiv").innerText = sumUddaSumJämn(myArray);
+            document.getElementById("myReturnDivViggo").innerText = sumUddaSumJämnViggo(myArray);
+        }
+
+        function sumUddaSumJämn(array) {
+            let uddaArray = [];
+            let jämnArray = [];
+            let jämnSum = 0;
+            let uddaSum = 0;
+
+            for (let i = 0; i < array.length; i++) {
+                if (Number(array[i]) % 2 === 0) {
+                    jämnArray.push(Number(array[i]));
+                } else if(Number(array[i] % 2 !== 0)) {
+                    uddaArray.push(Number(array[i]));
+                }
+            }
+
+            for (let i = 0; i < jämnArray.length; i++) {
+                jämnSum += jämnArray[i];
+            }
+            for (let i = 0; i < uddaArray.length; i++) {
+                uddaSum += uddaArray[i];
+            }
+
+            if (uddaSum < jämnSum) {
+                return jämnSum;
+            } else {
+                return uddaSum;
+            }
+        }
+
+        function sumUddaSumJämnViggo(array) {
+            return Math.max(...array.map(x => Number(x)).reduce((a, c) => [a[0] + c *(c%2 === 0), a[1] + c *(c%2 === 0)], [0, 0]))
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Funktioner 7</title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <button type="button" onclick="loadArray()">Skicka</button>
+    <div id="myReturnDiv"></div>
+
+    <script>
+        function loadArray() {
+            myArray = document.getElementById("myInput").value.split(" ");
+            document.getElementById("myReturnDiv").innerText = multiplyArray(myArray);
+        }
+
+        function multiplyArray(array) {
+            let sum = 1;
+            for (let i = 0; i < array.length; i++) {
+                sum *= Number(array[i]);
+            }
+            return sum
+        }
+    </script>
+</body>
+</html>

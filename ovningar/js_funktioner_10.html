@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Funktion 10</title>
+</head>
+<body>
+    <div id="myReturnDiv"></div>
+    <button type="button" onclick="slumpaLottoRad()">Slumpa</button>
+
+    <script>
+        function slumpaLottoRad() {
+            lottoArray = [];
+
+            while (lottoArray.length < 7) {
+                newNumber = Math.floor(Math.random()*35)+1;
+                if (lottoArray.includes(newNumber) === false) {
+                    lottoArray.push(newNumber);
+                }
+            }
+
+            document.getElementById("myReturnDiv").innerText = lottoArray;
+        }
+    </script>
+</body>
+</html>
