@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS String 3</title>
+</head>
+<body>
+    <input type="text" id="username">
+    <input type="text" id="password">
+    <button type="button" onclick="myFunction()">Skicka</button>
+
+    <div id="passwordDiv"></div>
+
+    <script>
+        function myFunction() {
+            const inputUser = document.getElementById("username");
+            const inputPassword = document.getElementById("password");
+            const div = document.getElementById("passwordDiv")
+
+            const user = inputUser.value
+            const password = inputPassword.value
+            
+
+            if (user.includes("webb")) {
+                div.innerText += user
+            } else {
+                div.innerText += "Ditt lösenord saknar webb"
+            }
+
+
+            if (password.includes("7") && password.includes("8")) {
+                if (password.length >= 6) {
+                    div.innerText += password
+                } else {
+                    div.innerText += "Ditt lösenord är för kort."
+                }
+            } else {
+                div.innerText += "Ditt lösenord innehåller inte nödvändiga tecken."
+            }
+        }
+    </script>
+</body>
+</html>

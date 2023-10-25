@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS String 2</title>
+</head>
+<body>
+    <input type="text" id="fornamn">
+    <input type="text" id="efternamn">
+    <input type="text" id="epostadress">
+
+    <button type="button" onclick="radioOutput()">Skicka</button>
+
+    <div id="myDivOutput">
+
+    </div>
+
+    <script>
+        function radioOutput() {
+            const fornamn = document.getElementById("fornamn");
+            const efternamn = document.getElementById("efternamn");
+            const epostadress = document.getElementById("epostadress");
+
+            const fornamnString = fornamn.value;
+            const efternamnString = efternamn.value;
+
+            if (fornamnString.charCodeAt(0) >= 65 && fornamnString.charCodeAt(0) <= 90) {
+                document.getElementById("myDivOutput").innerText += fornamnString;
+            } else {
+                document.getElementById("myDivOutput").innerText += "Första bokstaven är inte en stor bokstav";
+            }
+            
+            if (/^[A-Z]/.test(efternamnString)) {
+                document.getElementById("myDivOutput").innerText += efternamnString;
+            } else {
+                document.getElementById("myDivOutput").innerText += "Första bokstaven är inte en stor bokstav";
+            }
+
+            if (!epostadress.value.includes("@")) {
+                document.getElementById("myDivOutput").innerText += "Du måste ha @";
+            } else {
+                document.getElementById("myDivOutput").innerText += epostadress.value;
+            }
+        }
+    </script>
+</body>
+</html>

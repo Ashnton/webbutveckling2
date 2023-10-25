@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS String 1</title>
+</head>
+<body>
+    <input type="text" id="myTextInput">
+    <button type="button" onclick="bigVisa()">Skicka</button>
+
+    <div id="myDivDisplay"></div>
+
+    <script>
+        function bigVisa() {
+            const input = document.getElementById("myTextInput");
+            textString = input.value.toUpperCase();
+            document.getElementById("myDivDisplay").innerHTML = textString;
+            document.getElementById("myDivDisplay").innerHTML += textString.length;
+        }
+    </script>
+</body>
+</html>
