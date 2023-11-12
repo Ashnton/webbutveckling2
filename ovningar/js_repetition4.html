@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Repetition 4</title>
+</head>
+<body>
+    <input type="text" id="input1" placeholder="Priset">
+    <input type="text" id="input2" placeholder="Rabatten">%
+    <button id="myButton" onclick="rabattFunktion()">Skicka</button>
+
+    <div id="myDiv"></div>
+
+    <script>
+        function rabattFunktion() {
+            let priset = parseFloat(document.getElementById("input1").value);
+            let rabatt = parseFloat(document.getElementById("input2").value);
+
+            document.getElementById("myDiv").innerHTML = priset*((100-rabatt)/100);
+        }
+    </script>
+</body>
+</html>

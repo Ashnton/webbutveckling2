@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Repetition 2</title>
+</head>
+<body>
+    <input type="text" id="input1" placeholder="Antal dygn">
+    <input type="text" id="input2" placeholder="Antal timmar">
+    <input type="text" id="input3" placeholder="Antal minuter">
+    <button id="myButton" onclick="myAddingFunction()">Skicka</button>
+
+    <div id="myOutputDiv"></div>
+
+    <script>
+        function myAddingFunction() {
+            const dygn = parseFloat(document.getElementById("input1").value);
+            const timmar = parseFloat(document.getElementById("input2").value);
+            const minuter = parseFloat(document.getElementById("input3").value);
+            
+            answer = dygn*24*60 + timmar*60 + minuter;
+            document.getElementById("myOutputDiv").innerHTML = answer;
+        }
+    </script>
+</body>
+</html>
