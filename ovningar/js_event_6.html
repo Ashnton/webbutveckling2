@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Event 6</title>
+</head>
+<body>
+    <div style="width: 100px; height: 100px; margin: auto; background-color: aliceblue;" id="myDiv"></div>
+
+    <button id="myButton" style="display: block; margin: auto;">Höger</button>
+    <button id="myButton2" style="display: block; margin: auto;">Vänster</button>
+
+    <script>
+        // const colorArray = ["red", "blue", "green", "yellow", "orangered", "teal", "darkgrey", "lightyellow", "lime", "coral"];
+        
+        document.getElementById("myButton").addEventListener("mouseenter", () => {
+            i = 0;
+            let intervalRight = setInterval(() => {
+                i++;
+                document.getElementById("myDiv").style.transform = "translateX("+ i +"px)";
+                
+                if (i == window.innerWidth/2) {
+                    console.log(i)
+                    clearInterval(intervalRight);
+                    i = 0;
+                    document.getElementById("myDiv").style.transform = "translateX("+ i +"px)";
+                }
+            }, 100)
+        })
+        document.getElementById("myButton2").addEventListener("mouseenter", () => {
+            i = 0;
+            let intervalLeft = setInterval(() => {
+                i--;
+                document.getElementById("myDiv").style.transform = "translateX("+ i +"px)";
+                
+                if (i == -window.innerWidth/2) {
+                    console.log(i)
+                    clearInterval(intervalLeft);
+                    i = 0;
+                    document.getElementById("myDiv").style.transform = "translateX("+ i +"px)";
+                }
+            }, 100)
+        })
+    </script>
+</body>
+</html>

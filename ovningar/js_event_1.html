@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Events 1</title>
+</head>
+<body>
+    <button onmouseenter="changeColor()" onmouseleave="changeBackColor()">Byt</button>
+
+    <script>
+        function changeColor() {
+            document.body.style.backgroundColor = "red";
+        }
+        
+        function changeBackColor() {
+            document.body.style.backgroundColor = "white";
+        }
+    </script>
+</body>
+</html>

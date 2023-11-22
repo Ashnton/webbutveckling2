@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Event 4</title>
+</head>
+<body>
+    <div style="width: 100px; height: 100px; margin: auto;" id="myDiv"></div>
+
+    <button id="myButton" style="display: block; margin: auto;">Tryck på mig</button>
+
+    <script>
+        // const colorArray = ["red", "blue", "green", "yellow", "orangered", "teal", "darkgrey", "lightyellow", "lime", "coral"];
+        
+        document.getElementById("myButton").addEventListener("click", () => {
+            let myRed = Math.floor(Math.random()*256);
+            let myGreen = Math.floor(Math.random()*256);
+            let myBlue = Math.floor(Math.random()*256);
+            
+            document.getElementById("myDiv").style.backgroundColor = "RGB(" + myRed + "," + myGreen + "," + myBlue + ")";
+        })
+    </script>
+</body>
+</html>
