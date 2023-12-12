@@ -1,0 +1,56 @@
+<script src="https://koda.nu/simple.js">
+
+    let ball = { x: 200, y: 200, speed: 2, size: 20 };
+
+    let food = [];
+
+    let i = 0;
+    while (i < 1000) {
+        food.push({ x: random(totalWidth), y: random(totalHeight), alive: true });
+        i++;
+    }
+
+    function update() {
+        clearScreen();
+        circle(ball.x, ball.y, ball.size, "red");
+
+        let i = 0;
+        while (i < food.length) {
+            let piece = food[i];
+            if (piece.alive) {
+                circle(piece.x, piece.y, 3, "green");
+                if (distance(ball, piece) < (ball.size + 3)) {
+                    piece.alive = false;
+                    ball.size += 0.1;
+                    ball.speed *= 0.95;
+                }
+            }
+            i++;
+        }
+
+        let dist = distance(ball, mouse);
+        let maxSpeed = 10; // Justera den maximala hastigheten här
+        let minSpeed = 0.5; // Justera den minimala hastigheten här
+        let factor = 0.05; // Justera faktorn för hastighetsändring här
+
+        let speed = maxSpeed - (dist * factor); // Beräkna hastighet baserat på avstånd
+
+        speed = Math.max(speed, minSpeed); // Se till att hastigheten inte går under det minimala
+
+        let dy = speed * (ball.y - mouse.y) / dist; // Ändrade tecken för att vända riktningen
+        let dx = speed * (ball.x - mouse.x) / dist; // Ändrade tecken för att vända riktningen
+
+        // Kolla gränserna för skärmen
+        if (ball.x + ball.size >= totalWidth || ball.x - ball.size <= 0) {
+            dx = -dx*10+1; // Invertera x-riktningen
+        }
+
+        if (ball.y + ball.size >= totalHeight || ball.y - ball.size <= 0) {
+            dy = -dy*10+1; // Invertera y-riktningen
+        }
+
+        ball.x += dx;
+        ball.y += dy;
+    }
+
+</script>

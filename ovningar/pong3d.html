@@ -1,0 +1,48 @@
+<script src="https://koda.nu/simple3d.js">
+
+    pointLight(-700, 500, 330, "rgb(255,255,255)", 0.5);
+
+    ambientLight("rgb(100,100,100)");
+
+    let player1 = box(-600, 0, 0, 20, 100, 20, "red")
+    let player2 = box(600, 0, 0, 20, 100, 20, "green")
+
+    box(0, 500, 0, 1200, 20, 20, "black");
+    box(0, -500, 0, 1200, 20, 20, "black");
+
+
+    let ball = box(0, 0, 0, 20, 20, 20, "blue");
+    ball.xSpeed = 5;
+    ball.ySpeed = 5;
+
+    function update() {
+        if (keyboard.w) { player1.translateY(10); }
+        if (keyboard.s) { player1.translateY(-10); }
+
+        if (keyboard.up) { player2.translateY(10); }
+        if (keyboard.down) { player2.translateY(-10); }
+
+        ball.translateX(ball.xSpeed);
+        ball.translateY(ball.ySpeed);
+
+        if (ball.position.y > 500) { ball.ySpeed *= -1 }
+        if (ball.position.y < -500) { ball.ySpeed *= -1 }
+
+        if (ball.position.x > 580 &&
+            ball.position.x < 600 &&
+            ball.position.y < (player2.position.y + 50) &&
+            ball.position.y > (player2.position.y - 50)) {
+            ball.xSpeed *= -1
+
+        }
+
+        if (ball.position.x < -580 &&
+            ball.position.x > -600 &&
+            ball.position.y < (player1.position.y + 50) &&
+            ball.position.y > (player1.position.y - 50)) {
+            ball.xSpeed *= -1
+
+        }
+    }
+
+</script>
