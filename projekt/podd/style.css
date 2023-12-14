@@ -1,0 +1,65 @@
+body {
+    color: white;
+    padding: 1rem;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35),rgba(0, 0, 0, 0.35)), url(background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+article {
+    padding-left: 2rem;  
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 5rem);
+}
+img {
+    max-width: 25rem;
+    width: 100%;
+    margin: 1rem;
+    border-radius: 0.5rem;
+}
+
+audio {
+    width: 100%;
+    margin-block: 1rem;
+}
+
+.text-hidden {
+    height: 2.5rem;
+    overflow: hidden;
+}
+
+#toggle {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 50rem) {
+    main {
+        grid-template-columns: auto;
+        place-items: center;
+    }
+
+    article {
+        padding: 0;
+
+        display: grid;
+        grid-template-areas: 'heading' 'audio' 'paragraph';
+    }
+    audio {
+        grid-area: audio;
+    }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antons podd</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Antons podd</h1>
+    </header>
+
+    <main>
+        <img src="bild.jpg" alt="Bild på ungdom">
+        <article>
+            <h2>Varför vill ungdomar inte jobba?</h2>
+            <p data-visible="false" class="text-hidden" id="toggle-element">
+                Ungdomar är vår framtid men allt fler är av uppfattningen att ungdomar inte vill jobba. Dagens ungdomar är lata, oprofessionella och vill bara scrolla sociala medier och bli influencers för att få <em>"gratis pengar"</em>. Men är detta verkligen sant? Vill ungdomar verkligheten inte jobba och är de så lata som arbetsgivare runtom i hela Sverige säger. Ungdomsförmedlingens jobbexpert Anton Lidström kommer försöka besvara frågan en gång för alla i denna podd!
+            </p>
+            <span id="toggle" onclick="toggle('toggle', 'toggle-element')">Läs mer</span>
+
+            <audio controls>
+                <source src="/musik/Tetris.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </article>
+    </main>
+</body>
+
+</html>
