@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Canvas 2</title>
+</head>
+<body>
+    <canvas id="my-canvas" width="10000" height="10000"></canvas>
+
+    <script>
+        let canvas = document.getElementById('my-canvas');
+        let ctx = canvas.getContext("2d");
+
+        let x = 100
+        let y = 0;
+        let i = 0;
+        while (i < 10000) {
+            if (!(x%1000)) {
+                y+=100;
+            }
+            if (x === 1000) {
+                x = 0;
+            }
+
+            ritaGubbar(ctx, x, y);
+
+            x+=50;
+            i++;
+        }
+
+        function ritaGubbar(ctx, x, y) {
+            let randomMultiplier = Math.abs(Math.sin(x+y)*2)+1;
+            console.log(randomMultiplier);
+
+            // Första cirkeln
+            ctx.beginPath();
+            ctx.fillStyle = "#9999FF";
+            ctx.lineWidth=20;
+            ctx.arc(x, y, (15*randomMultiplier), 0, Math.PI*2, true);
+            ctx.fill();
+            
+            // Andra cirkeln
+            ctx.beginPath();
+            ctx.fillStyle = "#FF99FF";
+            ctx.lineWidth=20;
+            ctx.arc(x, y-20, (10*randomMultiplier), 0, Math.PI*2, true);
+            ctx.fill();
+            
+            // Knappar på magen
+            let yMinus = 0;
+            while (yMinus < 20) {
+                ctx.beginPath();
+                ctx.fillStyle = "#000000";
+                ctx.lineWidth=20;
+                ctx.arc(x, (y+yMinus*randomMultiplier), 1, 0, Math.PI*2, true);
+                ctx.fill();
+                yMinus += 10;
+            }
+            
+            // Ögon på huvudet
+            let xPlus = 0;
+            while (xPlus < 20) {
+                ctx.beginPath();
+                ctx.fillStyle = "#000000";
+                ctx.lineWidth=20;
+                ctx.arc(x+xPlus-2, y-20, 1, 0, Math.PI*2, true);
+                ctx.fill();
+                xPlus += 10;
+            }
+        }
+    </script>
+</body>
+</html>

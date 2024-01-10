@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Canvas 1</title>
+</head>
+
+<body>
+    <canvas id="my-canvas" width="250" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById('my-canvas');
+        let ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#99FF99";
+        ctx.fillRect(0, 0, 200, 50);
+
+        // cirkel
+        ctx.beginPath();
+        ctx.fillStyle = "FF0000";
+        ctx.strokeStyle = "#0F0";
+        ctx.lineWidth = 30;
+        ctx.arc(70,35,15,0,Math.PI*3.25,true);
+        ctx.fill();
+        ctx.stroke();
+        
+        // cirkel 2
+        ctx.beginPath();
+        ctx.fillStyle = "#FF00AA";
+        ctx.strokeStyle = "#FF00AA";
+        ctx.lineWidth = 30;
+        ctx.arc(70,65,15,0,Math.PI,true);
+        ctx.fill();
+        ctx.stroke();
+
+        // rektangel med toning
+        ctx.beginPath();
+        let grd=ctx.createLinearGradient(0,50,200,50);
+        grd.addColorStop(0,"#FFFFFF");
+        grd.addColorStop(1, "#000000");
+        ctx.fillStyle = grd;
+        ctx.fillRect(0,50,200,50);
+    </script>
+</body>
+
+</html>
