@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Övning JS Interaktivitet</title>
+</head>
+
+<body>
+    <canvas id="my-canvas" width="250" height="250"></canvas>
+
+    <script>
+        let canvas = document.getElementById('my-canvas');
+        let ctx = canvas.getContext("2d");
+
+        function updateCanvas() {
+            ctx.clearRect(0, 0, 250, 250)
+
+            createRect(ctx, x, y)
+            x=x+5;
+            y=y+5;
+        }
+        
+        function createRect(ctx, x, y) {
+            
+            ctx.beginPath();
+            // let grd = ctx.createLinearGradient(x, y, 200, 50);
+            ctx.fillStyle = "#0303F3";
+            ctx.fillRect(x, y, 200, 50);
+        }
+
+        let x=100, y=100;
+        let updateTime=50;
+
+        let timer = setInterval(updateCanvas, updateTime);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Övning JS Interaktivitet</title>
+</head>
+
+<body>
+    <canvas id="my-canvas" width="500" height="500"></canvas>
+
+    <script>
+        let yLimit = 500;
+        let xLimit = 500;
+
+        let canvas = document.getElementById('my-canvas');
+        let ctx = canvas.getContext("2d");
+
+        document.addEventListener("keydown", (e) => {
+            if (e.keyCode == 37) {
+                x = x - 5;
+                updateCanvas()
+            }
+            if (e.keyCode == 38) {
+                y = y - 5;
+                updateCanvas()
+            }
+            if (e.keyCode == 39) {
+                x = x + 5;
+                updateCanvas()
+            }
+            if (e.keyCode == 40) {
+                y = y + 5;
+                updateCanvas()
+            }
+        });
+
+        function updateCanvas() {
+            ctx.clearRect(0, 0, 500, 500)
+
+            createRect(ctx, x, y)
+        }
+
+        function createRect(ctx, x, y) {
+
+            ctx.beginPath();
+            // let grd = ctx.createLinearGradient(x, y, 200, 50);
+            ctx.fillStyle = "#0303F3";
+            ctx.fillRect(x, y, 100, 25);
+        }
+
+        let x = 100, y = 100;
+        let updateTime = 50;
+    </script>
+</body>
+
+</html>

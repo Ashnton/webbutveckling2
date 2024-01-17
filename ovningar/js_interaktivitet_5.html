@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Övning JS Interaktivitet</title>
+</head>
+
+<body>
+    <canvas id="my-canvas" width="500" height="500"></canvas>
+    <button onclick="pause()">Pause</button>
+    <button onclick="stop()">Stop</button>
+
+    <script>
+        let yLimit = 500;
+        let xLimit = 500;
+        let timer;
+
+        let canvas = document.getElementById('my-canvas');
+        let ctx = canvas.getContext("2d");
+
+        document.addEventListener("keydown", (e) => {
+            if (e.keyCode == 37) {
+                pause();
+
+                timer = setInterval(() => {
+                    x = x - 5;
+                    ctx.clearRect(0, 0, 500, 500)
+                    createRect(ctx, x, y)
+                }, updateTime);
+            }
+            if (e.keyCode == 38) {
+                pause();
+                
+                timer = setInterval(() => {
+                    y = y - 5;
+                    ctx.clearRect(0, 0, 500, 500)
+                    createRect(ctx, x, y)
+                }, updateTime);
+            }
+            if (e.keyCode == 39) {
+                pause();
+                
+                timer = setInterval(() => {
+                    x = x + 5;
+                    ctx.clearRect(0, 0, 500, 500)
+                    createRect(ctx, x, y)
+                }, updateTime);
+            }
+            if (e.keyCode == 40) {
+                pause();
+                
+                timer = setInterval(() => {
+                    y = y + 5;
+                    ctx.clearRect(0, 0, 500, 500)
+                    createRect(ctx, x, y)
+                }, updateTime);
+            }
+        });
+
+        function createRect(ctx, x, y) {
+            ctx.beginPath();
+            ctx.fillStyle = "#0303F3";
+            ctx.fillRect(x, y, 100, 25);
+        }
+
+        let x = 100, y = 100;
+        let updateTime = 50;
+
+        function start() {
+            timer = setInterval(updateCanvas, updateTime);
+        }
+
+        function pause() {
+            clearInterval(timer);
+        }
+
+        function stop() {
+            clearInterval(timer);
+            x = y = 0;
+            updateCanvas();
+        }
+    </script>
+</body>
+
+</html>
