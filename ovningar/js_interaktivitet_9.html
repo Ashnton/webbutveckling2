@@ -16,21 +16,24 @@
         let yLimit = 500;
         let xLimit = 500;
         let timer;
+        let timer2;
+        let randomBoxObj;
+        let collisionCounter = 0;
 
         let x = 100, y = 100;
-        let updateTime = 50;
+        let updateTime = 10;
 
         let canvas = document.getElementById('my-canvas');
         let ctx = canvas.getContext("2d");
 
-        let randomBoxObj = randomBox(ctx);
+        randomBoxObj = randomBox(ctx);
 
         document.addEventListener("keydown", (e) => {
             if (e.keyCode == 37) {
                 pause();
 
                 timer = setInterval(() => {
-                    x = x - 5;
+                    x = x - 2;
 
                     if (x <= 0) {
                         x = 600;
@@ -41,17 +44,18 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
+
+                    displayScore(collisionCounter);
                 }, updateTime);
             }
             if (e.keyCode == 38) {
                 pause();
 
                 timer = setInterval(() => {
-                    y = y - 5;
+                    y = y - 2;
 
                     if (y <= 0) {
                         y = 525;
@@ -62,17 +66,18 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
+
+                    displayScore(collisionCounter);
                 }, updateTime);
             }
             if (e.keyCode == 39) {
                 pause();
 
                 timer = setInterval(() => {
-                    x = x + 5;
+                    x = x + 2;
 
                     if (xLimit <= x) {
                         x = -100;
@@ -83,17 +88,18 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
+
+                    displayScore(collisionCounter);
                 }, updateTime);
             }
             if (e.keyCode == 40) {
                 pause();
 
                 timer = setInterval(() => {
-                    y = y + 5;
+                    y = y + 2;
 
                     if (yLimit <= y) {
                         y = -25;
@@ -104,13 +110,18 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
+
+                    displayScore(collisionCounter);
                 }, updateTime);
             }
         });
+
+        setInterval(() => {
+            collisionCounter--;
+        }, 2000)
 
         function getRandomColor() {
             // Generate random values for R, G, and B components
@@ -183,20 +194,28 @@
             }
         }
 
+        function displayScore(score) {
+            ctx.font = "30px Comic Sans MS";
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.fillText(score, 50, 50);
+        }
+
 
 
         function start() {
-            timer = setInterval(updateCanvas, updateTime);
+            // timer = setInterval(updateCanvas, updateTime);
         }
 
         function pause() {
             clearInterval(timer);
+            clearInterval(timer2);
         }
 
         function stop() {
             clearInterval(timer);
+            clearInterval(timer2);
             x = y = 0;
-            updateCanvas();
         }
     </script>
 </body>

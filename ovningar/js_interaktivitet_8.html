@@ -16,6 +16,8 @@
         let yLimit = 500;
         let xLimit = 500;
         let timer;
+        let randomBoxObj;
+        let collisionCounter = 0;
 
         let x = 100, y = 100;
         let updateTime = 50;
@@ -23,7 +25,7 @@
         let canvas = document.getElementById('my-canvas');
         let ctx = canvas.getContext("2d");
 
-        let randomBoxObj = randomBox(ctx);
+        randomBoxObj = randomBox(ctx);
 
         document.addEventListener("keydown", (e) => {
             if (e.keyCode == 37) {
@@ -41,9 +43,8 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
                 }, updateTime);
             }
@@ -62,9 +63,8 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
                 }, updateTime);
             }
@@ -83,9 +83,8 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
                 }, updateTime);
             }
@@ -104,9 +103,8 @@
                     createRect(ctx, x, y, 100, 25, "#0303F3")
 
                     if (checkCollision(randomBoxObj["x"], randomBoxObj["y"], randomBoxObj["width"], randomBoxObj["height"], x, y, 100, 25)) {
-                        document.body.style.backgroundColor = "red";
-                    } else {
-                        document.body.style.backgroundColor = "white";
+                        randomBoxObj = randomBox(ctx);
+                        collisionCounter++;
                     }
                 }, updateTime);
             }
