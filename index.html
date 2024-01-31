@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Min startsida</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Min startsida</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+  <script>
+    let audio = document.getElementById("tetris");
+    audio.volume = Math.random(); // 0.5 is the volume level between 0 and 1
+
+
+  </script>
 </head>
+
 <body>
-  <audio src="musik/Tetris.mp3" autoplay></audio>
+  <audio src="musik/Tetris.mp3" autoplay id="tetris"></audio>
   <audio src="musik/Symphony-no.-40-in-G-minor-K.-550-I.-Molto-Allegro(chosic.com).mp3" autoplay loop></audio>
   <header class="d-flex justify-content-center py-3">
     <ul class="nav nav-pills">
       <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Hem</a></li>
       <li class="nav-item"><a href="ovningar/index.html" class="nav-link">Övningar</a></li>
       <li class="nav-item"><a href="projekt/index.html" class="nav-link">Projekt</a></li>
+      <li class="nav-item"><a href="spel/pacman/index.htm" class="nav-link">PacMan</a></li>
     </ul>
   </header>
 
@@ -22,7 +35,8 @@
     <div class="py-5">
       <h1 class="display-5 fw-bold text-white">Antons startsida</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="fs-5 mb-4">Välkommen till min startsida. Här kan ni kolla på mina övningar och projekt. Om ni uppskattar det jag gör blir jag jätteglad om ni swishar en slant till 076-104 58 62. Tack.</p>
+        <p class="fs-5 mb-4">Välkommen till min startsida. Här kan ni kolla på mina övningar och projekt. Om ni
+          uppskattar det jag gör blir jag jätteglad om ni swishar en slant till 076-104 58 62. Tack.</p>
       </div>
     </div>
   </div>
@@ -40,4 +54,5 @@
     <p class="text-center text-muted">© 2023 Anton Lidström</p>
   </footer>
 </body>
+
 </html>
