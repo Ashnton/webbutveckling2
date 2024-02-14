@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Objekt 2</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="input-name">
+        <input type="number" id="input-age">
+        <input type="number" id="input-phonenr">
+    </div>
+    <div>
+        <button id="save-info">Lagra info</button>
+        <button id="write-info">Skriv ut info</button>
+    </div>
+
+    <div id="svar"></div>
+
+    <script>
+        let varelseArray = [];
+
+        // Varelse-konstruktören
+        function Varelse(name, age, phonenr) {
+            this.name = name;
+            this.age = age;
+            this.phonenr = phonenr;
+
+            this.skrivUtInfo = function () {
+                document.getElementById('svar').innerHTML += "<br>Namn: " + this.name + "<br>Ålder: " + this.age + "<br>Telefonnummer: " + this.phonenr
+            }
+        }
+
+        document.getElementById('save-info').addEventListener('click', () => {
+            if (varelseArray.length < 3) {
+                varelseArray.push(new Varelse(document.getElementById('input-name').value, document.getElementById('input-age').value, document.getElementById('input-phonenr').value))
+            }
+        })
+        document.getElementById('write-info').addEventListener('click', () => {
+            for (let i = 0; i < varelseArray.length; i++) {
+                varelseArray[i].skrivUtInfo();
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Objekt 4</title>
+</head>
+
+<body>
+    <canvas id="canvas" height="500" width="500"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d')
+
+        // Min bollkonstruktör
+        function Boll(x, y, radie, color, xSpeed, ySpeed) {
+            this.x = x
+            this.y = y
+            this.radie = radie
+            this.color = color
+            this.xSpeed = xSpeed
+            this.ySpeed = ySpeed
+
+            // Metod för att rita ut bollen i canvasen
+            Boll.prototype.draw = function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radie, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            Boll.prototype.move = function () {
+                this.x = this.x + xSpeed
+                this.y = this.y + ySpeed
+            }
+        }
+
+        boll1 = new Boll(100, 100, 25, "#AABBCC", 100, 100)
+        boll1.draw()
+    </script>
+</body>
+
+</html>

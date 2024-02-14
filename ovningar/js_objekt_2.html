@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://localhost:3000/ovningar/js_objekt_2.html? -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Objekt 2</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="input-name">
+        <input type="number" id="input-age">
+        <input type="number" id="input-phonenr">
+    </div>
+    <div>
+        <button id="save-info">Lagra info</button>
+        <button id="write-info">Skriv ut info</button>
+    </div>
+
+    <div id="svar">Namn: Anton<br>Ålder: 32<br>Telefonnummer: 3223</div>
+
+    <script>
+        let varelse;
+
+        // Varelse-konstruktören
+        function Varelse(name, age, phonenr) {
+            let namePrivate = name;
+            let agePrivate = age;
+            let phonenrPrivate = phonenr;
+
+            let skrivUtInfo = function () {
+                document.getElementById('svar').innerHTML = "Namn: " + namePrivate + "<br>Ålder: " + agePrivate + "<br>Telefonnummer: " + phonenrPrivate
+            }
+
+            this.infoSkrivare = function() {
+                skrivUtInfo();
+            }
+        }
+
+        document.getElementById('save-info').addEventListener('click', () => {
+            varelse = new Varelse(document.getElementById('input-name').value, document.getElementById('input-age').value, document.getElementById('input-phonenr').value)
+        })
+        document.getElementById('write-info').addEventListener('click', () => {
+            varelse.infoSkrivare()
+        })
+    </script>
+
+
+</body></html>
