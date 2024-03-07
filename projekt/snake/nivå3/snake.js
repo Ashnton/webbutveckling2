@@ -31,9 +31,14 @@ document.addEventListener("keydown", (e) => {
 // Spelets huvudloop
 
 function runSnake() {
-    [xSnake, ySnake] = moveSnake(direction, xSnake, ySnake, blockSize)
-    clearCanvas(ctx, xLimit, yLimit)
-    drawRect(ctx, xSnake, ySnake, blockSize, blockSize, "#FFFFFF")
+    if (checkBorderCollision(xSnake, ySnake, xLimit, yLimit, blockSize)) {
+        alert('Fuck off')
+        pause()
+    } else {
+        [xSnake, ySnake] = moveSnake(direction, xSnake, ySnake, blockSize)
+        clearCanvas(ctx, xLimit, yLimit)
+        drawRect(ctx, xSnake, ySnake, blockSize, blockSize, "#FFFFFF")
+    }
 }
 
 function moveSnake(direction, x, y, stepLength) {
@@ -48,6 +53,14 @@ function moveSnake(direction, x, y, stepLength) {
     }
 
     return [x, y]
+}
+
+function checkBorderCollision(x, y, xLimit, yLimit, stepLength) {
+    if (x <= 0-stepLength || y <= 0-stepLength || x >= xLimit || y >= yLimit) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function drawRect(ctx, x, y, width, height, color) {
@@ -65,4 +78,13 @@ function start() {
         runSnake();
     }, updateTime);
 
+    document.getElementById('startGameBtn').innerText = "Pause"
+    document.getElementById('startGameBtn').setAttribute('onclick', "pause()")
+    
+}
+
+function pause() {
+    clearInterval(gameLoop);
+    document.getElementById('startGameBtn').innerText = "Start"
+    document.getElementById('startGameBtn').setAttribute('onclick', "start()")
 }
