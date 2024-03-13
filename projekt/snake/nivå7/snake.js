@@ -1,3 +1,5 @@
+
+
 // Ställer in grundläggande konstanter
 const xLimit = 400;
 const yLimit = 400;
@@ -9,9 +11,20 @@ var gameLoop;
 var direction = "right";
 var xSnakeArray = [200];
 var ySnakeArray = [200];
+var xObstaclesArray = [];
+var yObstaclesArray = [];
 var xFood, yFood;
 var eaten = true;
 var score = 0;
+var level;
+setup = true;
+
+// Hanterar val av level
+document.querySelectorAll('.level-select-btn').forEach(function (button) {
+    button.addEventListener('click', () => {
+        level = button.getAttribute('data-level');
+    })
+})
 
 // Hämtar canvasen och kontexten
 const canvas = document.getElementById('game-canvas');
@@ -32,13 +45,34 @@ document.addEventListener("keydown", (e) => {
 
 // Spelets huvudloop
 function runSnake() {
+    console.log(level);
+
+    // Kontrollerar ifall det är första gången koden körs under omgången
+    if (setup) {
+        if (level == 2) {
+            [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
+        }
+        xSnakeArray = [200];
+        ySnakeArray = [200];
+
+        setup = false;
+    }
     // Säkerställer att ormen inte rör sig utanför ritytan
     if (checkBorderCollision(xSnakeArray[0], ySnakeArray[0], xLimit, yLimit, blockSize)) {
         alert('Game over!');
+        updateTime = 100;
+        score = 0;
+        xObstaclesArray, yObstaclesArray = [];
         pause();
     } else {
         // Rensar skärmen inför nästa uppritning
         clearCanvas(ctx, xLimit, yLimit);
+
+        if (level == 9) {
+            [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
+        } else if (level == 8) {
+            
+        }
 
         // Matlogik
         if (eaten) {
@@ -46,7 +80,7 @@ function runSnake() {
             while (!foodValid) {
                 [xFood, yFood] = getRandomCoordinates(xLimit, yLimit, blockSize);
                 for (let i = 0; i < xSnakeArray.length; i++) {
-                    if (xSnakeArray[i] != xFood && ySnakeArray[i] != yFood) {
+                    if (xSnakeArray[i] != xFood && ySnakeArray[i] != yFood && !checkCollisionSnake(xFood, yFood, xObstaclesArray, yObstaclesArray)) {
                         foodValid = true;
                     }
                 }
@@ -60,8 +94,14 @@ function runSnake() {
             else if (direction === "down") newY -= blockSize;
             else if (direction === "left") newX += blockSize;
             else if (direction === "right") newX -= blockSize;
-            xSnakeArray.push(newX);
-            ySnakeArray.push(newY);
+
+            if (level != 7) {
+                xSnakeArray.push(newX);
+                ySnakeArray.push(newY);
+            } else {
+                xObstaclesArray.push(newX)
+                yObstaclesArray.push(newY)
+            }
         }
 
         drawRect(ctx, xFood, yFood, blockSize, blockSize, "#FFBBAA");
@@ -86,6 +126,12 @@ function runSnake() {
         for (let i = 0; i < xSnakeArray.length; i++) {
             drawRect(ctx, xSnakeArray[i], ySnakeArray[i], blockSize, blockSize, "#FFFFFF");
         }
+        
+        // Rita hinder
+        for (let i = 0; i < xObstaclesArray.length; i++) {
+            drawRect(ctx, xObstaclesArray[i], yObstaclesArray[i], blockSize, blockSize, "#AA44BB");
+        }
+
 
         // Logik för att detektera om maten äts
         if (checkCollision(xSnakeArray[0], ySnakeArray[0], blockSize, blockSize, xFood, yFood, blockSize, blockSize)) {
@@ -96,6 +142,18 @@ function runSnake() {
         // Logik för att detektera om ormen krockar med sig själv
         if (checkCollisionSnake(newXHead, newYHead, xSnakeArray, ySnakeArray)) {
             alert('Game over!');
+            xObstaclesArray, yObstaclesArray = [];
+            updateTime = 100;
+            score = 0
+            pause();
+        }
+        
+        // Logik för att hantera om ormen kolliderar med ett hinder
+        if (checkCollisionSnake(newXHead, newYHead, xObstaclesArray, yObstaclesArray)) {
+            alert('Game over!');
+            xObstaclesArray, yObstaclesArray = [];
+            updateTime = 100;
+            score = 0
             pause();
         }
 
@@ -116,6 +174,25 @@ function moveSnake(direction, x, y, stepLength) {
     }
 
     return [x, y]
+}
+
+function randomObstacles(amount, snake_x, snake_y) {
+    let obstacles_x = [];
+    let obstacles_y = [];
+    for (let i = 0; i < amount; i++) {
+        let invalid_position = true;
+        while (invalid_position) {
+            let obstacle_temp_x = Math.floor(Math.random() * 20) * 20;
+            let obstacle_temp_y = Math.floor(Math.random() * 20) * 20;
+
+            if (!checkCollisionSnake(obstacle_temp_x, obstacle_temp_y, snake_x, snake_y)) {
+                obstacles_x.push(obstacle_temp_x);
+                obstacles_y.push(obstacle_temp_y);
+                invalid_position = false;
+            }
+        }
+    }
+    return [obstacles_x, obstacles_y];
 }
 
 function checkBorderCollision(x, y, xLimit, yLimit, stepLength) {
@@ -198,5 +275,6 @@ function pause() {
 
 function restartGame() {
     pause();
+    setup = true;
     start();
 }
