@@ -18,7 +18,6 @@ var eaten = true;
 var score = 0;
 var level;
 var removeFoodTimer = 0;
-var obstacleAmount = 10;
 var setup = true;
 
 // Hanterar val av level
@@ -50,8 +49,8 @@ function runSnake() {
 
     // Kontrollerar ifall det är första gången koden körs under omgången
     if (setup) {
-        if (level == 2 || level == 4 || level == 5) {
-            [xObstaclesArray, yObstaclesArray] = randomObstacles(obstacleAmount, xSnakeArray, ySnakeArray);
+        if (level == 2) {
+            [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
         }
         xSnakeArray = [200];
         ySnakeArray = [200];
@@ -69,18 +68,6 @@ function runSnake() {
         // Rensar skärmen inför nästa uppritning
         clearCanvas(ctx, xLimit, yLimit);
 
-        if (level == 4) {
-            if (removeFoodTimer % 16 == 0)
-            [xObstaclesArray, yObstaclesArray] = moveTowardsSnake(xSnakeArray, ySnakeArray, xObstaclesArray, yObstaclesArray, blockSize);
-            if (score % 5 === 0 && score !== 0) {
-                obstacleAmount += 2
-                [xObstaclesArray, yObstaclesArray] = randomObstacles(obstacleAmount, xSnakeArray, ySnakeArray);
-            }
-        }
-        if (level == 5) {
-            if (removeFoodTimer % 4 == 0)
-            [xObstaclesArray, yObstaclesArray] = moveTowardsSnake(xSnakeArray, ySnakeArray, xObstaclesArray, yObstaclesArray, blockSize);
-        }
         
         // Matlogik
         if (eaten) {
@@ -103,7 +90,7 @@ function runSnake() {
             else if (direction === "left") newX += blockSize;
             else if (direction === "right") newX -= blockSize;
 
-            if (level != 6) {
+            if (level != 7) {
                 xSnakeArray.push(newX);
                 ySnakeArray.push(newY);
             } else {
@@ -117,20 +104,11 @@ function runSnake() {
         // Levelspecifikt
         if (level == 9) {
             [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
-        } else if (level == 7 || level == 8) {
+        } else if (level == 8) {
 
             if (removeFoodTimer === 0) {
                 [xFood, yFood] = getRandomCoordinates(xLimit, yLimit, blockSize);
                 removeFoodTimer = distToSnake(xFood, yFood, xSnakeArray, ySnakeArray, blockSize);
-
-                // Gör ormen kortare
-                if (level == 8) {
-                    if (xSnakeArray.length > 1) {
-                        xSnakeArray.pop();
-                        ySnakeArray.pop();
-                    }
-                }
-
             }
         }
 
@@ -189,6 +167,7 @@ function runSnake() {
         displayScore(score);
 
         // Justera räknare
+        console.log(removeFoodTimer)
         removeFoodTimer--;
     }
 }
@@ -208,36 +187,7 @@ function moveSnake(direction, x, y, stepLength) {
 }
 
 function distToSnake(x_cord, y_cord, snake_x, snake_y, blocksize) {
-    return (Math.abs(Number(snake_x[0]) - Number(x_cord))/blocksize + Math.abs(Number(snake_y[0]) - Number(y_cord))/blocksize + 20)
-}
-
-function moveTowardsSnake(snake_x, snake_y, enemy_x, enemy_y, blocksize) {
-    for (let i = 0; i < enemy_x.length; i++) {
-        let newX, newY;
-        if (enemy_x[i] < snake_x[0]) {
-            newX = enemy_x[i] + blocksize;
-        }
-        if (enemy_y[i] < snake_y[0]) {
-            newY = enemy_y[i] + blocksize;
-        }
-        if (enemy_x[i] > snake_x[0]) {
-            newX = enemy_x[i] - blocksize;
-        }
-        if (enemy_y[i] > snake_y[0]) {
-            newY = enemy_y[i] - blocksize;
-        }
-        if (enemy_x[i] == snake_x[0]) {
-            newX = enemy_x[i];
-        }
-        if (enemy_y[i] == snake_y[0]) {
-            newY = enemy_y[i];
-        }
-        if (!checkCollisionSnake(newX, newY, enemy_x, enemy_y) && !checkCollisionSnake(newX, newY, snake_x, snake_y)) {
-            enemy_x[i] = newX;
-            enemy_y[i] = newY;
-        }
-    }
-    return [enemy_x, enemy_y]
+    return (Math.abs(Number(snake_x[0]) - Number(x_cord))/blocksize + Math.abs(Number(snake_y[0]) - Number(y_cord))/blocksize + 5)
 }
 
 function randomObstacles(amount, snake_x, snake_y) {
