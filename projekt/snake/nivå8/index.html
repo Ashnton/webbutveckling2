@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <audio src="../../../musik/ussr.mp3" loop autoplay></audio>
     <canvas id="game-canvas" width="400px" height="400px">
     </canvas>
 
@@ -23,6 +26,39 @@
     <button class="level-select-btn" data-level="9">Level 9</button>
     <button onclick="restartGame()">Starta om</button>
 
+    <div id="my-info-box"></div>
+
     <script src="snake.js"></script>
+    <script>
+        const infoDiv = document.getElementById("my-info-box");
+
+        // Hanterar visning av infotexter
+        document.querySelectorAll('.level-select-btn').forEach(function (button) {
+            button.addEventListener('mouseover', () => {
+                infoPick = button.getAttribute('data-level');
+
+                if (infoPick == 1) {
+                    infoDiv.innerText = "Första leveln: Helt vanlig snake utan krusiduller"
+                } else if (infoPick == 2) {
+                    infoDiv.innerText = "Andra leveln: 10 slumpmässigt utplacerade hinder"
+                } else if (infoPick == 3) {
+                    infoDiv.innerText = "Tredje leveln: Det går att åka ut genom kanterna"
+                } else if (infoPick == 4) {
+                    infoDiv.innerText = "Fjärde leveln: Hinder jagar dig nu i låg hastighet"
+                } else if (infoPick == 5) {
+                    infoDiv.innerText = "Femte leveln: Hinder jagar dig nu i högre hastighet"
+                } else if (infoPick == 6) {
+                    infoDiv.innerText = "Sjätte leveln: Tre mat och du lämnar hinder efter dig"
+                } else if (infoPick == 7) {
+                    infoDiv.innerText = "Sjunde leveln: Maten försvinner efter en viss tid"
+                } else if (infoPick == 8) {
+                    infoDiv.innerText = "Åttonde leveln: Maten försvinner efter en viss tid och ormen blir då kortare"
+                } else if (infoPick == 9) {
+                    infoDiv.innerText = "Nionde leveln: Hinder slumpas varje speltick"
+                }
+            })
+        })
+    </script>
 </body>
+
 </html>

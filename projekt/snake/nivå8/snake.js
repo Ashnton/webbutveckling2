@@ -1,5 +1,3 @@
-
-
 // Ställer in grundläggande konstanter
 const xLimit = 400;
 const yLimit = 400;
@@ -14,10 +12,14 @@ var ySnakeArray = [200];
 var xObstaclesArray = [];
 var yObstaclesArray = [];
 var xFood, yFood;
+var xFoodArray = [];
+var yFoodArray = [];
+var foodAmount = 1;
 var eaten = true;
 var score = 0;
 var level;
 var removeFoodTimer = 0;
+var obstacleAmount = 10;
 var setup = true;
 
 // Hanterar val av level
@@ -49,127 +51,190 @@ function runSnake() {
 
     // Kontrollerar ifall det är första gången koden körs under omgången
     if (setup) {
-        if (level == 2) {
-            [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
+        xObstaclesArray = [];
+        yObstaclesArray = [];
+
+        xFoodArray = [200];
+        yFoodArray = [200];
+
+        if (level == 6) {
+            foodAmount = 3;
+        } else {
+            foodAmount = 1;
         }
+
+
+        if (level == 2 || level == 4 || level == 5) {
+            [xObstaclesArray, yObstaclesArray] = randomObstacles(obstacleAmount, xSnakeArray, ySnakeArray);
+        }
+
         xSnakeArray = [200];
         ySnakeArray = [200];
 
         setup = false;
     }
     // Säkerställer att ormen inte rör sig utanför ritytan
-    if (checkBorderCollision(xSnakeArray[0], ySnakeArray[0], xLimit, yLimit, blockSize)) {
+    if (checkBorderCollision(xSnakeArray[0], ySnakeArray[0], xLimit, yLimit, blockSize) && level != 3) {
         alert('Game over!');
         updateTime = 100;
         score = 0;
         xObstaclesArray, yObstaclesArray = [];
         pause();
-    } else {
-        // Rensar skärmen inför nästa uppritning
-        clearCanvas(ctx, xLimit, yLimit);
+    } else { 
+        if (xSnakeArray[0] >= xLimit) {
+            xSnakeArray[0] = 0;
+        } else if (xSnakeArray[0] < 0) {
+            xSnakeArray[0] = xLimit;
+        }
+        if (ySnakeArray[0] >= yLimit) {
+            ySnakeArray[0] = 0;
+        } else if (ySnakeArray[0] < 0) {
+            ySnakeArray[0] = yLimit;
+        }
+    }
+    // Rensar skärmen inför nästa uppritning
+    clearCanvas(ctx, xLimit, yLimit);
 
-        
-        // Matlogik
-        if (eaten) {
-            foodValid = false;
-            while (!foodValid) {
-                [xFood, yFood] = getRandomCoordinates(xLimit, yLimit, blockSize);
-                for (let i = 0; i < xSnakeArray.length; i++) {
-                    if (xSnakeArray[i] != xFood && ySnakeArray[i] != yFood && !checkCollisionSnake(xFood, yFood, xObstaclesArray, yObstaclesArray)) {
+    if (level == 4) {
+        if (removeFoodTimer % 16 == 0)
+            [xObstaclesArray, yObstaclesArray] = moveTowardsSnake(xSnakeArray, ySnakeArray, xObstaclesArray, yObstaclesArray, blockSize);
+        if (score % 5 === 0 && score !== 0) {
+            obstacleAmount += 2
+            [xObstaclesArray, yObstaclesArray] = randomObstacles(obstacleAmount, xSnakeArray, ySnakeArray);
+        }
+    }
+    if (level == 5) {
+        if (removeFoodTimer % 4 == 0)
+            [xObstaclesArray, yObstaclesArray] = moveTowardsSnake(xSnakeArray, ySnakeArray, xObstaclesArray, yObstaclesArray, blockSize);
+    }
+
+    // Matlogik
+    if (eaten) {
+        xFoodArray = [];
+        yFoodArray = [];
+
+        foodValid = false;
+        while (!foodValid) {
+            [xFood, yFood] = getRandomCoordinates(xLimit, yLimit, blockSize);
+
+            for (let i = 0; i < xSnakeArray.length; i++) {
+                if (xSnakeArray[i] != xFood && ySnakeArray[i] != yFood && !checkCollisionSnake(xFood, yFood, xObstaclesArray, yObstaclesArray)) {
+                    xFoodArray.push(xFood)
+                    yFoodArray.push(yFood)
+
+                    if (xFoodArray.length >= foodAmount) {
                         foodValid = true;
                     }
                 }
             }
-            eaten = false;
-            updateTime /= 1.1;
-            // Skapa en ny bit av ormen på motsatt riktning av rörelsen
-            let newX = xSnakeArray[xSnakeArray.length - 1];
-            let newY = ySnakeArray[ySnakeArray.length - 1];
-            if (direction === "up") newY += blockSize;
-            else if (direction === "down") newY -= blockSize;
-            else if (direction === "left") newX += blockSize;
-            else if (direction === "right") newX -= blockSize;
-
-            if (level != 7) {
-                xSnakeArray.push(newX);
-                ySnakeArray.push(newY);
-            } else {
-                xObstaclesArray.push(newX)
-                yObstaclesArray.push(newY)
-            }
         }
-        
-        drawRect(ctx, xFood, yFood, blockSize, blockSize, "#FFBBAA");
-        
-        // Levelspecifikt
-        if (level == 9) {
-            [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
-        } else if (level == 8) {
+        eaten = false;
+        updateTime /= 1.1;
+        // Skapa en ny bit av ormen på motsatt riktning av rörelsen
+        let newX = xSnakeArray[xSnakeArray.length - 1];
+        let newY = ySnakeArray[ySnakeArray.length - 1];
+        if (direction === "up") newY += blockSize;
+        else if (direction === "down") newY -= blockSize;
+        else if (direction === "left") newX += blockSize;
+        else if (direction === "right") newX -= blockSize;
 
-            if (removeFoodTimer === 0) {
-                [xFood, yFood] = getRandomCoordinates(xLimit, yLimit, blockSize);
-                removeFoodTimer = distToSnake(xFood, yFood, xSnakeArray, ySnakeArray, blockSize);
-            }
+        if (level != 6) {
+            xSnakeArray.push(newX);
+            ySnakeArray.push(newY);
+        } else {
+            xObstaclesArray.push(xSnakeArray[0]);
+            yObstaclesArray.push(ySnakeArray[0]);
         }
-
-        // Flytta ormens huvud baserat på rörelsedirektionen
-        let newXHead = xSnakeArray[0];
-        let newYHead = ySnakeArray[0];
-        if (direction === "up") newYHead -= blockSize;
-        else if (direction === "down") newYHead += blockSize;
-        else if (direction === "left") newXHead -= blockSize;
-        else if (direction === "right") newXHead += blockSize;
-
-        // Ta bort svansens sista bit
-        xSnakeArray.pop();
-        ySnakeArray.pop();
-
-        // Lägg till det nya huvudet i ormens position
-        xSnakeArray.unshift(newXHead);
-        ySnakeArray.unshift(newYHead);
-
-        // Rita ormen
-        for (let i = 0; i < xSnakeArray.length; i++) {
-            drawRect(ctx, xSnakeArray[i], ySnakeArray[i], blockSize, blockSize, "#FFFFFF");
-        }
-        
-        // Rita hinder
-        for (let i = 0; i < xObstaclesArray.length; i++) {
-            drawRect(ctx, xObstaclesArray[i], yObstaclesArray[i], blockSize, blockSize, "#AA44BB");
-        }
-
-
-        // Logik för att detektera om maten äts
-        if (checkCollision(xSnakeArray[0], ySnakeArray[0], blockSize, blockSize, xFood, yFood, blockSize, blockSize)) {
-            eaten = true;
-            score++;
-        }
-
-        // Logik för att detektera om ormen krockar med sig själv
-        if (checkCollisionSnake(newXHead, newYHead, xSnakeArray, ySnakeArray)) {
-            alert('Game over!');
-            xObstaclesArray, yObstaclesArray = [];
-            updateTime = 100;
-            score = 0
-            pause();
-        }
-        
-        // Logik för att hantera om ormen kolliderar med ett hinder
-        if (checkCollisionSnake(newXHead, newYHead, xObstaclesArray, yObstaclesArray)) {
-            alert('Game over!');
-            xObstaclesArray, yObstaclesArray = [];
-            updateTime = 100;
-            score = 0
-            pause();
-        }
-
-        // Ritar upp poängen
-        displayScore(score);
-
-        // Justera räknare
-        console.log(removeFoodTimer)
-        removeFoodTimer--;
     }
+
+    // Ritar in maten på canvasen
+    for (let i = 0; i < xFoodArray.length; i++) {
+        drawRect(ctx, xFoodArray[i], yFoodArray[i], blockSize, blockSize, "#FFBBAA");
+    }
+
+    // Levelspecifikt
+    if (level == 9) {
+        [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
+    } else if (level == 7 || level == 8) {
+
+        if (removeFoodTimer === 0) {
+            xFoodArray = [];
+            yFoodArray = [];
+
+            [xFoodArray[0], yFoodArray[0]] = getRandomCoordinates(xLimit, yLimit, blockSize);
+            removeFoodTimer = distToSnake(xFoodArray[0], yFoodArray[0], xSnakeArray, ySnakeArray, blockSize);
+
+            // Gör ormen kortare
+            if (level == 8) {
+                if (xSnakeArray.length > 1) {
+                    xSnakeArray.pop();
+                    ySnakeArray.pop();
+
+                    if (score > 0) {
+                        score--;
+                    }
+                }
+            }
+
+        }
+    }
+
+    // Flytta ormens huvud baserat på rörelsedirektionen
+    let newXHead = xSnakeArray[0];
+    let newYHead = ySnakeArray[0];
+    if (direction === "up") newYHead -= blockSize;
+    else if (direction === "down") newYHead += blockSize;
+    else if (direction === "left") newXHead -= blockSize;
+    else if (direction === "right") newXHead += blockSize;
+
+    // Ta bort svansens sista bit
+    xSnakeArray.pop();
+    ySnakeArray.pop();
+
+    // Lägg till det nya huvudet i ormens position
+    xSnakeArray.unshift(newXHead);
+    ySnakeArray.unshift(newYHead);
+
+    // Rita ormen
+    for (let i = 0; i < xSnakeArray.length; i++) {
+        drawRect(ctx, xSnakeArray[i], ySnakeArray[i], blockSize, blockSize, "#FFFFFF");
+    }
+
+    // Rita hinder
+    for (let i = 0; i < xObstaclesArray.length; i++) {
+        drawRect(ctx, xObstaclesArray[i], yObstaclesArray[i], blockSize, blockSize, "#AA44BB");
+    }
+
+
+    // Logik för att detektera om maten äts
+    if (checkCollisionArray(xSnakeArray[0], ySnakeArray[0], xFoodArray, yFoodArray)) {
+        eaten = true;
+        score++;
+    }
+
+    // Logik för att detektera om ormen krockar med sig själv
+    if (checkCollisionSnake(newXHead, newYHead, xSnakeArray, ySnakeArray)) {
+        alert('Game over!');
+        xObstaclesArray, yObstaclesArray = [];
+        updateTime = 100;
+        score = 0
+        pause();
+    }
+
+    // Logik för att hantera om ormen kolliderar med ett hinder
+    if (checkCollisionArray(newXHead, newYHead, xObstaclesArray, yObstaclesArray)) {
+        alert('Game over!');
+        xObstaclesArray, yObstaclesArray = [];
+        updateTime = 100;
+        score = 0
+        pause();
+    }
+
+    // Ritar upp poängen
+    displayScore(score);
+
+    // Justera räknare
+    removeFoodTimer--;
 }
 
 function moveSnake(direction, x, y, stepLength) {
@@ -187,7 +252,36 @@ function moveSnake(direction, x, y, stepLength) {
 }
 
 function distToSnake(x_cord, y_cord, snake_x, snake_y, blocksize) {
-    return (Math.abs(Number(snake_x[0]) - Number(x_cord))/blocksize + Math.abs(Number(snake_y[0]) - Number(y_cord))/blocksize + 5)
+    return (Math.abs(Number(snake_x[0]) - Number(x_cord)) / blocksize + Math.abs(Number(snake_y[0]) - Number(y_cord)) / blocksize + 20)
+}
+
+function moveTowardsSnake(snake_x, snake_y, enemy_x, enemy_y, blocksize) {
+    for (let i = 0; i < enemy_x.length; i++) {
+        let newX, newY;
+        if (enemy_x[i] < snake_x[0]) {
+            newX = enemy_x[i] + blocksize;
+        }
+        if (enemy_y[i] < snake_y[0]) {
+            newY = enemy_y[i] + blocksize;
+        }
+        if (enemy_x[i] > snake_x[0]) {
+            newX = enemy_x[i] - blocksize;
+        }
+        if (enemy_y[i] > snake_y[0]) {
+            newY = enemy_y[i] - blocksize;
+        }
+        if (enemy_x[i] == snake_x[0]) {
+            newX = enemy_x[i];
+        }
+        if (enemy_y[i] == snake_y[0]) {
+            newY = enemy_y[i];
+        }
+        if (!checkCollisionSnake(newX, newY, enemy_x, enemy_y) && !checkCollisionSnake(newX, newY, snake_x, snake_y)) {
+            enemy_x[i] = newX;
+            enemy_y[i] = newY;
+        }
+    }
+    return [enemy_x, enemy_y]
 }
 
 function randomObstacles(amount, snake_x, snake_y) {
@@ -219,6 +313,14 @@ function checkBorderCollision(x, y, xLimit, yLimit, stepLength) {
 
 function checkCollisionSnake(head_x, head_y, snake_x, snake_y) {
     for (let i = 1; i < snake_x.length; i++) {
+        if (head_x == snake_x[i] && head_y == snake_y[i]) {
+            return true
+        }
+    }
+}
+
+function checkCollisionArray(head_x, head_y, snake_x, snake_y) {
+    for (let i = 0; i < snake_x.length; i++) {
         if (head_x == snake_x[i] && head_y == snake_y[i]) {
             return true
         }
