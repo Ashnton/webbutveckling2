@@ -15,7 +15,7 @@ var xFood, yFood;
 var xFoodArray = [];
 var yFoodArray = [];
 var foodAmount = 1;
-var eaten = true;
+var eaten = false;
 var score = 0;
 var level;
 var removeFoodTimer = 0;
