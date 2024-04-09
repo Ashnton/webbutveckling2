@@ -2,7 +2,7 @@
 const xLimit = 400;
 const yLimit = 400;
 const blockSize = 20;
-var updateTime = 100;
+var updateTime = 200;
 
 // Ställer in globala variabler
 var gameLoop;
@@ -76,7 +76,7 @@ function runSnake() {
     // Säkerställer att ormen inte rör sig utanför ritytan
     if (checkBorderCollision(xSnakeArray[0], ySnakeArray[0], xLimit, yLimit, blockSize) && level != 3) {
         alert('Game over!');
-        updateTime = 100;
+        updateTime = 200;
         score = 0;
         xObstaclesArray, yObstaclesArray = [];
         pause();
@@ -216,7 +216,7 @@ function runSnake() {
     if (checkCollisionSnake(newXHead, newYHead, xSnakeArray, ySnakeArray)) {
         alert('Game over!');
         xObstaclesArray, yObstaclesArray = [];
-        updateTime = 100;
+        updateTime = 200;
         score = 0
         pause();
     }
@@ -225,7 +225,7 @@ function runSnake() {
     if (checkCollisionArray(newXHead, newYHead, xObstaclesArray, yObstaclesArray)) {
         alert('Game over!');
         xObstaclesArray, yObstaclesArray = [];
-        updateTime = 100;
+        updateTime = 200;
         score = 0
         pause();
     }
