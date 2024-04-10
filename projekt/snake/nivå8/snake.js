@@ -80,7 +80,7 @@ function runSnake() {
         score = 0;
         xObstaclesArray, yObstaclesArray = [];
         pause();
-    } else { 
+    } else {
         if (xSnakeArray[0] >= xLimit) {
             xSnakeArray[0] = 0;
         } else if (xSnakeArray[0] < 0) {
@@ -110,26 +110,35 @@ function runSnake() {
 
     // Matlogik
     if (eaten) {
+        
         xFoodArray = [];
         yFoodArray = [];
-
+        
         foodValid = false;
         while (!foodValid) {
             [xFood, yFood] = getRandomCoordinates(xLimit, yLimit, blockSize);
-
+            let isTrue = true
             for (let i = 0; i < xSnakeArray.length; i++) {
-                if (xSnakeArray[i] != xFood && ySnakeArray[i] != yFood && !checkCollisionSnake(xFood, yFood, xObstaclesArray, yObstaclesArray)) {
-                    xFoodArray.push(xFood)
-                    yFoodArray.push(yFood)
-
-                    if (xFoodArray.length >= foodAmount) {
-                        foodValid = true;
-                    }
+                // xSnakeArray[i] != xFood && ySnakeArray[i] != yFood --- Tidigare använd if-sats
+                if (checkCollisionArray(xFood, yFood, xSnakeArray, ySnakeArray) || checkCollisionArray(xFood, yFood, xObstaclesArray, yObstaclesArray)) {
+                    isTrue = false
+                }
+            }
+            if (isTrue) {
+                xFoodArray.push(xFood)
+                yFoodArray.push(yFood)
+                
+                if (xFoodArray.length >= foodAmount) {
+                    foodValid = true;
                 }
             }
         }
         eaten = false;
+        // Uppdaterar spelets hastighet
         updateTime /= 1.1;
+        pause();
+        start();
+
         // Skapa en ny bit av ormen på motsatt riktning av rörelsen
         let newX = xSnakeArray[xSnakeArray.length - 1];
         let newY = ySnakeArray[ySnakeArray.length - 1];
@@ -157,7 +166,7 @@ function runSnake() {
         [xObstaclesArray, yObstaclesArray] = randomObstacles(10, xSnakeArray, ySnakeArray);
     } else if (level == 7 || level == 8) {
 
-        if (removeFoodTimer === 0) {
+        if (removeFoodTimer <= 0) {
             xFoodArray = [];
             yFoodArray = [];
 
@@ -235,6 +244,8 @@ function runSnake() {
 
     // Justera räknare
     removeFoodTimer--;
+
+    console.log(updateTime)
 }
 
 function moveSnake(direction, x, y, stepLength) {
@@ -276,7 +287,7 @@ function moveTowardsSnake(snake_x, snake_y, enemy_x, enemy_y, blocksize) {
         if (enemy_y[i] == snake_y[0]) {
             newY = enemy_y[i];
         }
-        if (!checkCollisionSnake(newX, newY, enemy_x, enemy_y) && !checkCollisionSnake(newX, newY, snake_x, snake_y)) {
+        if (!checkCollisionArray(newX, newY, enemy_x, enemy_y) && !checkCollisionArray(newX, newY, snake_x, snake_y)) {
             enemy_x[i] = newX;
             enemy_y[i] = newY;
         }
@@ -293,7 +304,7 @@ function randomObstacles(amount, snake_x, snake_y) {
             let obstacle_temp_x = Math.floor(Math.random() * 20) * 20;
             let obstacle_temp_y = Math.floor(Math.random() * 20) * 20;
 
-            if (!checkCollisionSnake(obstacle_temp_x, obstacle_temp_y, snake_x, snake_y)) {
+            if (!checkCollisionArray(obstacle_temp_x, obstacle_temp_y, snake_x, snake_y)) {
                 obstacles_x.push(obstacle_temp_x);
                 obstacles_y.push(obstacle_temp_y);
                 invalid_position = false;

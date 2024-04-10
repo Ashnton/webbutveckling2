@@ -2,7 +2,9 @@
     display: block;
 
     margin: auto;
-    background-color: burlywood;
+    background: url(bilder/1.webp);
+    background-position: center;
+    background-size: cover;
 }
 
 #my-info-box {
