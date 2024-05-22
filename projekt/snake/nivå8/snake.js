@@ -96,8 +96,9 @@ function runSnake() {
     clearCanvas(ctx, xLimit, yLimit);
 
     if (level == 4) {
-        if (removeFoodTimer % 16 == 0)
+        if (removeFoodTimer % 16 == 0) {
             [xObstaclesArray, yObstaclesArray] = moveTowardsSnake(xSnakeArray, ySnakeArray, xObstaclesArray, yObstaclesArray, blockSize);
+        }
         if (score % 5 === 0 && score !== 0) {
             obstacleAmount += 2
             [xObstaclesArray, yObstaclesArray] = randomObstacles(obstacleAmount, xSnakeArray, ySnakeArray);
@@ -244,8 +245,6 @@ function runSnake() {
 
     // Justera räknare
     removeFoodTimer--;
-
-    console.log(updateTime)
 }
 
 function moveSnake(direction, x, y, stepLength) {
